@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useSelector } from "react-redux";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import { Jobs } from "components/Jobs";
+import { Employees } from "components/Employees";
 
-function App() {
+const drawerWidth = 240;
+
+export const App = () => {
+  const store = useSelector((state) => state);
+
+  console.log("store", store);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ display: "flex" }}>
+      <Jobs />
+      <Box
+        component='main'
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+      >
+        <Toolbar />
+        <Employees />
+      </Box>
+    </Box>
   );
-}
-
-export default App;
+};
